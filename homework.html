@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Homework & Guidelines</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 900px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; }
+    
+    .prompts-container { display: flex; flex-direction: column; gap: 40px; }
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 35px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .prompt-card:hover { transform: translateY(-5px); }
+    .prompt-card h2 { font-size: 1.4rem; font-weight: 600; color: var(--accent-primary); margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+    
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 25px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      margin-bottom: 25px;
+      border: 1px solid var(--card-border);
+      line-height: 1.5;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    
+    /* Custom Scrollbar */
+    .prompt-text::-webkit-scrollbar { width: 8px; }
+    .prompt-text::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 18px; height: 18px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+    @media (max-width: 600px) { h1 { font-size: 2rem; } .prompt-text { font-size: 0.85rem; } }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Homework & Guidelines</h1>
+    </header>
+
+    <main class="prompts-container">
+      
+      <!-- Prompt 1 -->
+      <div class="prompt-card">
+        <h2>Homework</h2>
+        <pre id="p1" class="prompt-text">Let’s make it precise so it doesn’t become vague thinking.
+
+Before you outline a 5–6k book, you must manually clarify these seven elements yourself:
+
+Friction
+Rule
+Belief
+Decision
+Outcome
+Reinforcement
+Alignment
+
+If you cannot articulate them clearly in plain language, the book will feel blurry.
+
+Now let me sharpen what each one must contain so your preparation is rigorous.
+
+---
+
+# 1️⃣ Friction
+
+Not a theme.
+Not a category.
+Not “low confidence.”
+
+It must be:
+A repeatable, observable instability.
+
+Good:
+“Losing confidence after public criticism.”
+
+Weak:
+“Confidence issues.”
+
+Test:
+Can you describe one vivid scene where this friction appears?
+If yes → strong.
+If no → too abstract.
+
+---
+
+# 2️⃣ Rule
+
+Not advice.
+Not morality.
+Not philosophy.
+
+It must be:
+An observed recurring pattern.
+
+Good:
+“Skill improves through corrective feedback.”
+
+Weak:
+“You should listen to others.”
+
+Test:
+Can this rule operate even if someone doesn’t believe in it?
+If yes → structural.
+If no → opinion.
+
+---
+
+# 3️⃣ Belief
+
+This is the distortion.
+It must feel psychologically reasonable.
+
+Good:
+“If I’m criticized, it means I’m incompetent.”
+
+Weak:
+“People think negatively.”
+
+Test:
+Can you explain why someone would logically hold this belief?
+If yes → usable.
+If not → too shallow.
+
+---
+
+# 4️⃣ Decision
+
+This is behavioral.
+It must be specific.
+
+Good:
+“Avoid public speaking after criticism.”
+
+Weak:
+“React badly.”
+
+Test:
+Can you visualize the action clearly?
+
+---
+
+# 5️⃣ Outcome
+
+Immediate consequence.
+Not long-term destiny.
+
+Good:
+“Reduced exposure to feedback.”
+
+Weak:
+“Life gets worse.”
+
+Keep it concrete.
+
+---
+
+# 6️⃣ Reinforcement
+
+This is critical.
+Show how the outcome strengthens the belief.
+
+Example:
+Avoid speaking
+→ No new feedback
+→ Skill stagnates
+→ Next attempt feels worse
+→ “See? I’m not good at this.”
+
+If you cannot map reinforcement clearly,
+the book will lack psychological depth.
+
+---
+
+# 7️⃣ Alignment
+
+This must contain three layers:
+Corrected knowledge
+Corrected decision
+Corrected action
+
+If alignment is vague (“think positively”), it will weaken your framework.
+
+It must be structural:
+New understanding
+→ New decision
+→ New behavior
+→ New outcome
+→ New reinforcement
+
+That builds bounce-back confidence.
+
+---
+
+# Your Real Discipline Rule
+
+If you can write these seven in one page clearly,
+you are ready to outline.
+
+If you struggle to define even one,
+do not outline yet.
+Refine first.
+
+---
+
+# A Critical Insight
+
+Most weak self-help books fail because:
+They start with solutions.
+You are starting with structure.
+That is stronger.</pre>
+        <button class="copy-button" data-target="p1">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <span class="btn-text">Copy Homework</span>
+        </button>
+      </div>
+
+      <!-- Prompt 2 -->
+      <div class="prompt-card">
+        <h2>Guidelines</h2>
+        <pre id="p2" class="prompt-text">Bottom-up is the right instinct for your 5–6k sharp books.
+
+Because you chose:
+One specific friction (narrow and sharp)
+
+So your thinking should flow like this:
+Friction → Belief → Decision → Outcome → Reinforcement → Rule → Alignment
+
+Notice something important:
+The Rule does not come first in bottom-up thinking.
+It emerges from analysis.
+That keeps you honest.
+
+---
+
+# The Correct Bottom-Up Workflow
+
+Let’s make this practical.
+Before outlining a book, sit with one friction and do this exercise.
+
+---
+
+## Step 1 — Describe the Friction Like a Scene
+
+Write one paragraph describing:
+• A concrete situation
+• What the person feels
+• What they think
+• What they do
+
+No theory.
+Only observation.
+If you can’t write a vivid scene, the friction is too abstract.
+
+---
+
+## Step 2 — Extract the Belief
+
+Ask:
+“What must this person believe for this reaction to make sense?”
+
+Belief must be:
+• Internally logical
+• Emotionally protective
+• Repeated across incidents
+
+If the belief sounds stupid, you haven’t found the real one yet.
+
+---
+
+## Step 3 — Identify the Decision Error
+
+Ask:
+“What action naturally follows from this belief?”
+
+Make it behavioral.
+Avoid vague labels like “reacts poorly.”
+Make it visible.
+
+---
+
+## Step 4 — Map the Immediate Outcome
+
+Ask:
+“What immediately happens because of that decision?”
+
+Not destiny.
+Not life collapse.
+Just immediate consequence.
+
+---
+
+## Step 5 — Reveal the Reinforcement
+
+This is the turning point.
+
+Ask:
+“How does that outcome confirm the original belief?”
+
+If you cannot show reinforcement clearly,
+the friction will feel random instead of structural.
+
+---
+
+## Step 6 — Only Now Extract the Rule
+
+Now ask:
+“What structural pattern is being violated here?”
+
+The rule should explain:
+Why the outcome is predictable.
+
+If your rule feels moral or preachy,
+refine it.
+
+It must feel like:
+Observed pattern.
+Not advice.
+
+---
+
+## Step 7 — Design Alignment
+
+Alignment must reverse the loop:
+Corrected knowledge
+→ New decision
+→ New outcome
+→ New reinforcement
+
+If alignment feels motivational,
+it is weak.
+
+If alignment feels structural,
+it is strong.
+
+---
+
+# Why Bottom-Up Is Powerful
+
+Because:
+You are not forcing a rule onto reality.
+You are discovering it from reality.
+That keeps your framework grounded.
+
+---
+
+# One Important Warning
+
+Bottom-up can produce shallow rules if you rush.
+If the rule feels obvious or generic,
+go deeper.
+
+Ask:
+“What deeper structural pattern explains this?”</pre>
+        <button class="copy-button" data-target="p2">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <span class="btn-text">Copy Guidelines</span>
+        </button>
+      </div>
+
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.querySelectorAll('.copy-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const text = document.getElementById(targetId).textContent;
+        const btnText = button.querySelector('.btn-text');
+        const originalText = btnText.textContent;
+
+        navigator.clipboard.writeText(text).then(() => {
+          btnText.textContent = 'Copied!';
+          button.classList.add('copied');
+          
+          setTimeout(() => {
+            btnText.textContent = originalText;
+            button.classList.remove('copied');
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy: ', err);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
