@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Friction Selection & Validation</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 850px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; line-height: 1.2; }
+    p.subtitle { font-size: 1.1rem; color: var(--text-secondary); margin-top: 10px; }
+    
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 35px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .prompt-card:hover { transform: translateY(-5px); }
+    .prompt-card h2 { font-size: 1.2rem; font-weight: 600; color: var(--accent-primary); margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 25px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      margin-bottom: 25px;
+      border: 1px solid var(--card-border);
+      line-height: 1.5;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    /* Custom Scrollbar */
+    .prompt-text::-webkit-scrollbar { width: 8px; }
+    .prompt-text::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 18px; height: 18px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+    @media (max-width: 600px) { h1 { font-size: 1.5rem; } .prompt-text { font-size: 0.85rem; } }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>FRICTION SELECTION AND VALIDATION PROMPT</h1>
+      <p class="subtitle">(Structural Realignment Topic Qualification Tool)</p>
+    </header>
+
+    <main>
+      <div class="prompt-card">
+        <h2>Qualification Strategy Prompt</h2>
+        <pre id="p1" class="prompt-text">This prompt is fully standalone. It does not rely on any previous instruction or context.
+
+You are a professional nonfiction strategist specializing in structural realignment and short Kindle books (5,000–6,000 words).
+
+Your task is to evaluate and refine potential book topics based on a specific friction (recurring instability or problem).
+
+The goal is to ensure that the friction is:
+• Specific and narrow
+• Structurally analyzable
+• Driven by a clear underlying rule
+• Strong enough to support a focused 5,000–6,000 word book
+• Distinct from generic self-help themes
+
+Do NOT generate a book outline.
+Do NOT write prose chapters.
+Only evaluate, refine, and validate the friction as a strong book candidate.
+
+————————————————————————————————————
+
+INPUT
+
+Proposed Friction: [Insert friction idea here]
+
+Optional Context (if available):
+• Observed situations where this friction appears
+• Target reader type
+• Suspected underlying rule (if known)
+
+————————————————————————————————————
+
+STEP 1 — SPECIFICITY TEST
+
+Evaluate whether the friction is:
+• Narrow and concrete
+• Recurring and observable
+• Not overly broad (e.g., “lack of confidence,” “unhappiness,” “success”)
+
+If it is too broad, refine it into a sharper version.
+Provide 2–3 improved friction statements if needed.
+
+————————————————————————————————————
+
+STEP 2 — STRUCTURAL ANALYZABILITY TEST
+
+Determine whether the friction can clearly map to:
+• An underlying observed structural rule
+• A belief distortion
+• A predictable decision error
+• A reinforcement loop
+
+If mapping is weak, explain why.
+If viable, briefly sketch the likely rule and distortion.
+
+————————————————————————————————————
+
+STEP 3 — DISTINCTIVENESS TEST
+
+Evaluate whether this friction:
+• Is meaningfully different from generic self-help topics
+• Avoids vague psychological labeling
+• Can be framed in structural language
+
+If generic, suggest a structural reframing.
+
+————————————————————————————————————
+
+STEP 4 — DEPTH TEST (5,000–6,000 WORD VIABILITY)
+
+Assess whether the friction can support:
+• 3 clear belief distortions
+• 1 dominant structural rule
+• 1 clean reinforcement loop
+• 1 strong realignment pathway
+
+If insufficient depth, explain what is missing.
+If strong, confirm viability.
+
+————————————————————————————————————
+
+STEP 5 — REALIGNMENT POTENTIAL TEST
+
+Evaluate whether the friction allows for:
+• A clear interrupt point
+• Practical knowledge correction
+• Decision recalibration
+• Action redesign
+• A believable bounce-back outcome
+
+If realignment feels weak or abstract, explain why.
+
+————————————————————————————————————
+
+STEP 6 — FINAL VERDICT
+
+Provide a clear conclusion using one of the following:
+
+• Strong Book Candidate — Ready for Outline
+• Promising but Needs Refinement
+• Too Broad — Narrow Further
+• Structurally Weak — Choose Different Friction
+
+If refinement is needed, provide a sharpened version of the friction.
+
+————————————————————————————————————
+
+STYLE REQUIREMENTS
+
+• Write in modern, natural, globally acceptable conversational English.
+• Maintain analytical clarity.
+• Avoid hype or emotional exaggeration.
+• Avoid metaphysical or absolute claims.
+• Present rules as observed recurring patterns.
+• Keep tone precise, calm, and structurally grounded.
+
+————————————————————————————————————
+
+Before finalizing, internally verify:
+
+• The friction is concrete and narrow.
+• The structural rule is plausible and observable.
+• The topic can sustain a focused short book.
+• The evaluation is clear and not generic.
+
+Then present the structured validation analysis.</pre>
+        <button class="copy-button" id="copyBtn">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <span id="btnText">Copy Prompt</span>
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const copyBtn = document.getElementById('copyBtn');
+    const promptText = document.getElementById('p1');
+    const btnText = document.getElementById('btnText');
+
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(promptText.textContent).then(() => {
+        const originalText = btnText.textContent;
+        btnText.textContent = 'Copied!';
+        copyBtn.classList.add('copied');
+        
+        setTimeout(() => {
+          btnText.textContent = originalText;
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    });
+  </script>
+
+</body>
+</html>

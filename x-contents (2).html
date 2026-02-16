@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>X-Contents</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 900px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; }
+    
+    .prompts-container { display: flex; flex-direction: column; gap: 40px; }
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 30px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .prompt-card:hover { transform: translateY(-5px); }
+    .prompt-card h2 { font-size: 1.1rem; font-weight: 600; color: var(--accent-primary); margin-bottom: 15px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 25px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      margin-bottom: 25px;
+      border: 1px solid var(--card-border);
+      line-height: 1.5;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    
+    /* Custom Scrollbar */
+    .prompt-text::-webkit-scrollbar { width: 8px; }
+    .prompt-text::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 18px; height: 18px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+    @media (max-width: 600px) { h1 { font-size: 2rem; } .prompt-text { font-size: 0.85rem; } }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>X-Contents</h1>
+    </header>
+
+    <main class="prompts-container">
+      
+      <!-- Prompt 1 -->
+      <div class="prompt-card">
+        <h2>STANDALONE X SINGLE-POST GENERATOR</h2>
+        <pre id="p1" class="prompt-text">This prompt is fully standalone. It does not rely on any previous instruction or context.
+
+You are a professional short-form insight writer creating high-quality single posts for X (formerly Twitter).
+
+Your task is to generate standalone X posts derived from a structural realignment framework.
+
+Each post must stand completely on its own.
+It must NOT reference any book, article, series, or prior content.
+It must NOT contain any call to action.
+It must NOT instruct readers to follow, subscribe, click, or visit anything.
+
+Each post must feel complete, clear, and intellectually sharp within a single post.
+
+Target length: 1–3 short paragraphs OR 1 concise structured insight.
+Keep within standard X readability range.
+
+————————————————————————————————————
+
+POST INPUTS
+
+Friction: [Specific recurring problem or instability]
+
+Rule: [Observed structural rule underlying this friction]
+
+Belief: [Core distortion driving the friction]
+
+Decision: [Typical decision error resulting from the belief]
+
+Outcome: [Immediate consequence]
+
+Reinforcement: [How the outcome strengthens the original belief]
+
+Alignment: [Corrected knowledge, decision, and action]
+
+Primary Angle (choose one per post):
+• Friction Insight
+• Belief Exposure
+• Structural Rule Statement
+• Decision Consequence Chain
+• Reinforcement Loop Insight
+• Realignment Clarity
+
+Number of posts to generate: [Insert number]
+
+————————————————————————————————————
+
+POST STRUCTURE OPTIONS
+
+Each post may follow one of these formats:
+
+1. Contrast Format
+   — State the common assumption.
+   — Contrast it with structural reality.
+
+2. Cause-Effect Format
+   — Present belief.
+   — Show decision.
+   — Show consequence.
+
+3. Structural Insight Format
+   — State the rule clearly.
+   — Explain its impact in one or two sharp lines.
+
+4. Loop Exposure Format
+   — Show belief → outcome → reinforcement.
+   — Reveal why the pattern feels true.
+
+5. Realignment Format
+   — Clarify the shift in knowledge.
+   — Show the behavioral correction.
+   — Emphasize stability.
+
+Each post must feel self-contained and finished.
+
+————————————————————————————————————
+
+STYLE AND TONE REQUIREMENTS
+
+• Address the reader directly using “you” and “your” when appropriate.
+• Write in modern, natural, globally acceptable conversational English.
+• Sound intelligent, articulate, and human.
+• Maintain calm authority.
+• Avoid hype, exaggeration, emotional manipulation, or dramatic tone.
+• Avoid preachy or moral language.
+• Avoid abstract philosophical phrasing.
+• Keep sentences clean and sharp.
+• Use short lines when helpful for emphasis.
+
+————————————————————————————————————
+
+IMPORTANT FRAMEWORK RULE
+
+Present the structural rule as an observed recurring pattern, not as an absolute universal guarantee.
+
+Avoid deterministic or metaphysical assertions.
+
+————————————————————————————————————
+
+Before finalizing the posts, internally verify:
+
+• Each post stands completely alone.
+• No call to action appears.
+• The insight is sharp and specific, not generic.
+• The tone is natural and steady.
+• The message builds clarity and structural confidence.
+
+Then present the final X posts, separated clearly for readability.</pre>
+        <button class="copy-button" data-target="p1">
+          <svg class="icon copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          <svg class="icon copied-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <span class="btn-text">Copy Single-Post Prompt</span>
+        </button>
+      </div>
+
+      <!-- Prompt 2 -->
+      <div class="prompt-card">
+        <h2>STANDALONE X THREAD GENERATOR</h2>
+        <pre id="p2" class="prompt-text">This prompt is fully standalone. It does not rely on any previous instruction or context.
+
+You are a professional short-form strategist creating high-quality X (formerly Twitter) threads.
+
+Your task is to generate a structured X thread derived from a structural realignment framework.
+
+The thread must stand completely on its own.
+It must NOT reference any book, article, series, or prior content.
+It must NOT contain any call to action.
+It must NOT instruct readers to follow, subscribe, click, or visit anything.
+
+The thread must feel complete, logically progressive, and intellectually satisfying.
+
+Target length: 5–9 posts per thread.
+Each post must be concise, readable, and structurally sharp.
+
+————————————————————————————————————
+
+THREAD INPUTS
+
+Friction: [Specific recurring problem or instability]
+
+Rule: [Observed structural rule underlying this friction]
+
+Belief: [Core distortion driving the friction]
+
+Decision: [Typical decision error resulting from the belief]
+
+Outcome: [Immediate consequence]
+
+Reinforcement: [How the outcome strengthens the original belief]
+
+Alignment: [Corrected knowledge, decision, and action]
+
+Primary Angle (choose one per thread):
+• Friction Breakdown
+• Belief Deconstruction
+• Structural Rule Explanation
+• Decision Chain Exposure
+• Reinforcement Loop Reveal
+• Realignment Roadmap
+
+Number of threads to generate: [Insert number]
+
+————————————————————————————————————
+
+THREAD STRUCTURE REQUIREMENTS
+
+Each thread must follow a clear progression:
+
+1. Opening Post
+   — State the central friction or insight clearly.
+   — Establish tension immediately.
+   — Avoid clickbait.
+
+2. Surface Interpretation
+   — Show what people commonly assume.
+   — Keep it concise.
+
+3. Structural Reveal
+   — Introduce the observed rule in operational language.
+   — Avoid metaphysical or absolute claims.
+
+4. Belief → Decision → Outcome Mapping
+   — Show cause-effect clearly.
+   — Keep sentences short and sharp.
+
+5. Reinforcement Mechanism
+   — Explain why the pattern persists.
+   — Reveal the self-sustaining loop.
+
+6. Interrupt Point
+   — Identify where awareness changes trajectory.
+
+7. Realignment Clarity
+   — Show how knowledge shifts.
+   — Show how decisions recalibrate.
+   — Show how behavior stabilizes.
+
+8. Closing Post
+   — Reinforce structural understanding.
+   — End grounded, not motivational.
+   — No CTA.
+
+Not every thread must use all eight stages explicitly, but logical progression is mandatory.
+
+————————————————————————————————————
+
+STYLE AND TONE REQUIREMENTS
+
+• Address the reader directly using “you” and “your” when appropriate.
+• Write in modern, natural, globally acceptable conversational English.
+• Sound intelligent, articulate, and human.
+• Maintain calm authority.
+• Avoid hype, exaggeration, or emotional manipulation.
+• Avoid preachy or moral language.
+• Avoid abstract philosophical phrasing.
+• Keep sentences crisp and readable.
+• Use line breaks strategically for clarity.
+
+————————————————————————————————————
+
+IMPORTANT FRAMEWORK RULE
+
+Present the structural rule as an observed recurring pattern, not as an absolute universal guarantee.
+
+Avoid deterministic or metaphysical assertions.
+
+————————————————————————————————————
+
+Before finalizing the threads, internally verify:
+
+• Each thread stands completely alone.
+• No call to action appears.
+• Logical progression is clear.
+• The insight is specific and not generic.
+• The tone is natural, steady, and reader-friendly.
+• The closing builds clarity, grounding, and structural confidence.
+
+Then present the final thread(s), with each post clearly separated and numbered for readability.</pre>
+        <button class="copy-button" data-target="p2">
+          <svg class="icon copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          <svg class="icon copied-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <span class="btn-text">Copy Thread Prompt</span>
+        </button>
+      </div>
+
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.querySelectorAll('.copy-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const text = document.getElementById(targetId).textContent;
+        const btnText = button.querySelector('.btn-text');
+        const originalText = btnText.textContent;
+
+        navigator.clipboard.writeText(text).then(() => {
+          btnText.textContent = 'Copied!';
+          button.classList.add('copied');
+          
+          setTimeout(() => {
+            btnText.textContent = originalText;
+            button.classList.remove('copied');
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy: ', err);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
